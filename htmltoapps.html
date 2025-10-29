@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dark UI</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Variabel Tema Dark */
+        :root {
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #4cc9f0;
+            --accent-hover: #3aa8d0;
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --border: #2d3748;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #f56565;
+        }
+
+        /* Styling Global */
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 1rem;
+            text-align: center;
+            background: rgba(26, 26, 46, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--accent), #9d4edd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* Grid Tombol */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* Kartu Tombol */
+        .button-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .button-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .button-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            color: var(--accent);
+        }
+
+        .button-card p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tombol */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(76, 201, 240, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            box-shadow: 0 4px 10px rgba(72, 187, 120, 0.3);
+        }
+
+        .btn-success:hover {
+            background: #38a169;
+            box-shadow: 0 6px 15px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            box-shadow: 0 4px 10px rgba(237, 137, 54, 0.3);
+        }
+
+        .btn-warning:hover {
+            background: #dd771c;
+            box-shadow: 0 6px 15px rgba(237, 137, 54, 0.4);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            box-shadow: 0 4px 10px rgba(245, 101, 101, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: #e53e3e;
+            box-shadow: 0 6px 15px rgba(245, 101, 101, 0.4);
+        }
+
+        /* Output */
+        .output {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .output h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        #result {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            min-height: 60px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HTML TO APPS BY ZAMSXIT</h1>
+        <p class="subtitle">Tes JavaScript dengan berbagai jenis alert</p>
+    </header>
+
+    <div class="container">
+        <div class="button-grid">
+            <div class="button-card fade-in">
+                <h3>Alert Sederhana</h3>
+                <p>Tampilkan pesan alert biasa</p>
+                <button class="btn" id="simpleAlert">Tampilkan Alert</button>
+            </div>
+
+            <div class="button-card fade-in">
+                <h3>Alert Konfirmasi</h3>
+                <p>Alert dengan pilihan OK atau Batal</p>
+                <button class="btn btn-success" id="confirmAlert">Konfirmasi</button>
+            </div>
+
+            <div class="button-card fade-in">
+                <h3>Alert Input</h3>
+                <p>Alert yang meminta input dari pengguna</p>
+                <button class="btn btn-warning" id="promptAlert">Input Data</button>
+            </div>
+
+            <div class="button-card fade-in">
+                <h3>Alert Custom</h3>
+                <p>Alert dengan konten yang lebih kompleks</p>
+                <button class="btn btn-danger" id="customAlert">Alert Custom</button>
+            </div>
+        </div>
+
+        <div class="output fade-in">
+            <h3>Hasil Tes JavaScript</h3>
+            <div id="result">Klik tombol di atas untuk melihat hasil...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 ZamsXit</p>
+    </footer>
+
+    <script>
+        // JavaScript Native
+        document.addEventListener('DOMContentLoaded', function() {
+            const resultDiv = document.getElementById('result');
+            
+            // Fungsi untuk update hasil
+            function updateResult(message) {
+                resultDiv.textContent = message;
+                resultDiv.style.background = 'rgba(76, 201, 240, 0.1)';
+                setTimeout(() => {
+                    resultDiv.style.background = 'rgba(0, 0, 0, 0.2)';
+                }, 500);
+            }
+
+            // Tombol Alert Sederhana
+            document.getElementById('simpleAlert').addEventListener('click', function() {
+                alert('Ini adalah alert sederhana!');
+                updateResult('Alert sederhana telah ditampilkan pada ' + new Date().toLocaleTimeString());
+            });
+
+            // Tombol Alert Konfirmasi
+            document.getElementById('confirmAlert').addEventListener('click', function() {
+                const isConfirmed = confirm('Apakah Anda yakin ingin melanjutkan?');
+                if (isConfirmed) {
+                    updateResult('Pengguna memilih OK pada ' + new Date().toLocaleTimeString());
+                } else {
+                    updateResult('Pengguna memilih Batal pada ' + new Date().toLocaleTimeString());
+                }
+            });
+
+            // Tombol Alert Input
+            document.getElementById('promptAlert').addEventListener('click', function() {
+                const name = prompt('Masukkan nama Anda:');
+                if (name) {
+                    updateResult(`Halo, ${name}! Selamat datang. Input diterima pada ${new Date().toLocaleTimeString()}`);
+                } else {
+                    updateResult('Tidak ada input yang diberikan pada ' + new Date().toLocaleTimeString());
+                }
+            });
+
+            // Tombol Alert Custom
+            document.getElementById('customAlert').addEventListener('click', function() {
+                // Membuat alert custom dengan konten HTML
+                const customAlert = `
+                    <div style="
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 1000;
+                    ">
+                        <div style="
+                            background: var(--bg-card);
+                            padding: 2rem;
+                            border-radius: 16px;
+                            max-width: 400px;
+                            text-align: center;
+                            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                            border: 1px solid var(--border);
+                        ">
+                            <h3 style="color: var(--accent); margin-bottom: 1rem;">Alert Custom</h3>
+                            <p style="margin-bottom: 1.5rem;">Ini adalah alert custom yang dibuat dengan HTML dan CSS!</p>
+                            <button id="closeCustomAlert" style="
+                                background: var(--accent);
+                                color: white;
+                                border: none;
+                                padding: 0.7rem 1.5rem;
+                                border-radius: 50px;
+                                cursor: pointer;
+                                font-weight: 600;
+                            ">Tutup</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.insertAdjacentHTML('beforeend', customAlert);
+                
+                document.getElementById('closeCustomAlert').addEventListener('click', function() {
+                    document.body.removeChild(document.body.lastChild);
+                    updateResult('Alert custom ditutup pada ' + new Date().toLocaleTimeString());
+                });
+                
+                updateResult('Alert custom ditampilkan pada ' + new Date().toLocaleTimeString());
+            });
+
+            // Animasi untuk elemen dengan kelas fade-in
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
